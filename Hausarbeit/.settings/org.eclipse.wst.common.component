@@ -2,6 +2,7 @@
     <wb-module deploy-name="Hausarbeit">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/Tests"/>
         <property name="context-root" value="Hausarbeit"/>
         <property name="java-output-path" value="/Hausarbeit/build/classes"/>
     </wb-module>

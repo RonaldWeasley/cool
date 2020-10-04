@@ -1,4 +1,7 @@
-
+/**
+ * @author 
+ *
+ */
 
 
 import java.io.BufferedReader;
@@ -53,14 +56,7 @@ public class ParkhausServlet extends HttpServlet {
 			case "avg":
 				out.println(String.format("%.2f",Parkhaus.getAvg()));
 				break;
-			/*case "cars":
-				StringBuilder carBuilder = new StringBuilder();
-				for (CarIF car: cars() ) {
-					if(carBuilder.length() > 1) carBuilder.append(",");
-					carBuilder.append(car.serialize());
-				}
-				out.println(carBuilder.toString());
-				break;*/
+
 			case "Fahrerstatistik":
 				/*JsonObject FahrerRoot = Json.createObjectBuilder()
 					.add("data", Json.createArrayBuilder()

@@ -8,7 +8,7 @@ public class Durchschnittsberechnung {
 	
 	public Float build() {
 		
-		return 
+		return 0f;
 	}
 	
 }

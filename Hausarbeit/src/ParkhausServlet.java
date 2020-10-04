@@ -20,14 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/Parkhaus")
 public class ParkhausServlet extends HttpServlet {
-	static float counter=0;
-	static int gehbehindertcounter=0;
-	static int poscounter=0;
-	static int negcounter=0;
-	static int gm;
-	static int gmn;
-	PositiveBewertung p = new PositiveBewertung(poscounter);
-	NegativeBewertung n = new NegativeBewertung(negcounter);
+
 	
 	
 	private ServletContext getApplication() {
@@ -53,17 +46,12 @@ public class ParkhausServlet extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			switch(param) {
 			case "Summe":
-				Float Summe = getPersistentSum();
-				out.println(String.format("%.2f",Summe));
-				System.out.println("Summe: " + Summe);
+				//Float Summe = getPersistentSum();
+				out.println(String.format("%.2f",Parkhaus.getSum()));
+				System.out.println("Summe: " + Parkhaus.getSum());
 				break;
 			case "avg":
-				if(counter!=0) {
-				out.println(getPersistentSum()/counter);
-				System.out.println("AVG: " + getPersistentSum()/counter);
-				}else {
-					out.println(0);
-				}
+				out.println(String.format("%.2f",Parkhaus.getAvg()));
 				break;
 			/*case "cars":
 				StringBuilder carBuilder = new StringBuilder();
@@ -87,22 +75,22 @@ public class ParkhausServlet extends HttpServlet {
 				" \"values\": [\n" + String.format("%d",gehbehindertcounter)+",\n" + String.format("%d", (int)(counter-gehbehindertcounter))+"\n" + " ],\n" + ""
 								+ "\"labels\":[\"gebehindert\",\"gesund\"],"+
 						" \"type\": \"pie\"\n" + " }\n" + " ]\n" + "}";*/
-				Fahrerstatistik fs=new Fahrerstatistik(gehbehindertcounter,(int)counter-gehbehindertcounter);
-					out.println(fs.build());
-					System.out.println(fs.build());
+				//Fahrerstatistik fs=new Fahrerstatistik(gehbehindertcounter,(int)counter-gehbehindertcounter);
+					out.println(Parkhaus.getFahrstatistik().build());
+					System.out.println(Parkhaus.getFahrstatistik().build());
 				break;
 			case "Gefaelltmir":
-				gm= p.build();
+				int gm= Parkhaus.getPosWert().build();
 				out.println(gm);
 				System.out.println(gm);
 			break;
 			case "Gefaelltmirnicht":
-				gmn= n.build();
+				int gmn= Parkhaus.getNegWert().build();
 				out.println(gmn);
 				System.out.println(gmn);
 			break;
 			case "Nutzererfahrung":
-				Nutzererfahrung ne=new Nutzererfahrung(gm,gmn);
+				Nutzererfahrung ne=Parkhaus.getNuErf();
 					out.println(ne.build());
 					System.out.println(ne.build());
 			}
@@ -117,22 +105,21 @@ public class ParkhausServlet extends HttpServlet {
 		String[] params = body.split(",");
 		String event = params[0];
 		if("leave".equals(event)) {
-			Float Summe = getPersistentSum();
+			//Float Summe = getPersistentSum();
 			String priceString = params[4];
-			counter++;
+			Parkhaus.leave();
 			if("gehbehindert".equals(params[8])) {
-				gehbehindertcounter++;		
+				Parkhaus.gb();
 				}
 			
 			if(!"_".equals(priceString)) {
 				float price = Float.parseFloat(priceString);
-				Summe = (price/100) + Summe;
-				getApplication().setAttribute("Summe", Summe);
+				Parkhaus.zahlung(price);
 				
 			}
 			response.setContentType("text/html");
 			PrintWriter out = response.getWriter();
-			out.println(Summe + "€");
+			out.println(Parkhaus.getSum() + "€");
 			if("Behinderbutton".equals(event)) {
 				float price = Float.parseFloat(priceString);
 				price = price * 0.5f;
@@ -167,3 +154,4 @@ public class ParkhausServlet extends HttpServlet {
 		return stringBuilder.toString();
 	}
 }
+

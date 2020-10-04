@@ -7,6 +7,9 @@ public class PositiveBewertung {
 		this.poscounter=poscounter;
 
 	}
+	public int getCounter(){
+		return poscounter;
+	}
 	
 	public int build() {
 		

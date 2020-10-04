@@ -9,7 +9,7 @@ public class Summenberechnung {
 	
 	public Float build() {
 		
-		return 
+		return 0f;
 	}
 	
 }

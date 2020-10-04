@@ -12,5 +12,8 @@ public class NegativeBewertung {
 		
 		return ++this.negcounter;
 	}
-}
 
+    public int getCounter() {
+		return negcounter;
+    }
+}

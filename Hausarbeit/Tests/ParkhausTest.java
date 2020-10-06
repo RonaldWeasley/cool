@@ -6,23 +6,40 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.Before;
 import org.junit.jupiter.api.AfterAll;
 
 class ParkhausTest {
     @BeforeAll
-    static void setupTest(){
+    static void setup() {
+    	System.out.println("Start!");
+    }
+   /* static void setupTest(){
     	System.out.println("Start!");
         for (int i =0;i<10;i++)
         Parkhaus.leave();
         Parkhaus.zahlung(10.7f);
         Parkhaus.zahlung(2.7f);
         Parkhaus.zahlung(1.3f);
-    }
+    }*/
 
     @Test
     @DisplayName("Testet ob Summenfunktion funktioniert")
     void getSum() {
+    	Parkhaus.zahlung(10.7f);
+        Parkhaus.zahlung(2.7f);
+        Parkhaus.zahlung(1.3f);
         assertEquals(Parkhaus.getSum(),(10.7f+2.7f+1.3f));
+    }
+    
+    @Test
+    @DisplayName("Keine negativen Zahlen bei getSum")
+    public String negativeZahlenSum() throws Exception{
+        if(Parkhaus.getSum() >= 0 ) {
+            return "positive";
+        } else {
+            return "negative";
+        }
     }
     
     @Test
@@ -32,11 +49,35 @@ class ParkhausTest {
     }
 
     @Test
+    @DisplayName("Testet ob Avg funktioniert")
+   /* @Before
+    static void setupTest(){
+        for (int i =0;i<10;i++)
+        Parkhaus.leave();
+        Parkhaus.zahlung(10.7f);
+        Parkhaus.zahlung(2.7f);
+        Parkhaus.zahlung(1.3f);
+    }*/
     void getAvg() {
+    	Parkhaus.zahlung(10.7f);
+        Parkhaus.zahlung(2.7f);
+        Parkhaus.zahlung(1.3f);
         assertEquals(Parkhaus.getAvg(),(10.7f+2.7f+1.3f)/10);
+    }
+    
+    @Test
+    @DisplayName("Keine negativen Zahlen bei getAvg")
+    public String negativeZahlenAvg() throws Exception{
+        if(Parkhaus.getAvg() >= 0 ) {
+            return "positive";
+        } else {
+            return "negative";
+        }
     }
 
     @Test
+    @Before
+    
     @DisplayName("Test bei leerer Fahrerstatistik")
     void getFahrstatistik() {
     	assertEquals("{\n" +
@@ -44,13 +85,14 @@ class ParkhausTest {
     		" {\n" +
     		" \"values\": [\n" +
     		"0,\n" +
-    		"10\n" +
+    		"0\n" +
     		" ],\n" +
     		"\"labels\":[\"gebehindert\",\"gesund\"], \"type\": \"pie\"\n" +
     		" }\n" +
     		" ]\n" +
     		"}", Parkhaus.getFahrstatistik().build());
     }
+    
     @Test
     @DisplayName("Testet 0 gesunde Kunden und 2 gehbehinderte Kunden")
     void getFahrstatistikNurGB() {

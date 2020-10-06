@@ -1,44 +1,58 @@
 
-public class Parkhaus {
+public class Parkhaus implements ParkhausInterface {
 
-    static float counter=0;
-    static int gehbehindertcounter=0;
-    //static int poscounter=0;
-    //static int negcounter=0;
-    //static int gm;
-    //static int gmn;
-    static float sum;
-    static PositiveBewertung p = new PositiveBewertung(0);
-    static NegativeBewertung n = new NegativeBewertung(0);
-    public static float getSum(){
-        return sum;
+
+    private float sum;
+    private int counter;
+    private BewertungsInterface p ;
+    private BewertungsInterface n ;
+    private FahrerstatistikInterface fs;
+
+    public Parkhaus(){
+        sum=0;
+        p=new PositiveBewertung(0);
+        n=new NegativeBewertung(0);
+        fs=new Fahrerstatistik(0,0);
     }
-    public static float getAvg(){
+    @Override
+    public float getSum(){
+        return sum/100;
+    }
+    @Override
+    public float getAvg(){
         if(counter!=0) {
             return sum/counter;
         }else {
             return 0;
         }
     }
-    public static Fahrerstatistik getFahrstatistik(){
-        return new Fahrerstatistik(gehbehindertcounter,(int)counter-gehbehindertcounter);
+    @Override
+    public FahrerstatistikInterface getFahrstatistik(){
+        return fs;
     }
-    public static PositiveBewertung getPosWert(){
+    @Override
+    public BewertungsInterface getPosWert(){
         return p;
     }
-    public static NegativeBewertung getNegWert(){
+    @Override
+    public BewertungsInterface getNegWert(){
         return n;
     }
-    public static Nutzererfahrung getNuErf(){
+    @Override
+    public Nutzererfahrung getNuErf(){
         return new Nutzererfahrung(p.getCounter(),n.getCounter());
     }
-    public static void leave(){
-        counter++;
+    @Override
+    public void leave(){
+        fs.addFahrer();
     }
-    public static void gb(){
-        gehbehindertcounter++;
+    @Override
+    public void gb(){
+        fs.addGehbehindert();
     }
-    public static void zahlung(float in){
+    @Override
+    public void zahlung(float in){
         sum+=in;
     }
 }
+

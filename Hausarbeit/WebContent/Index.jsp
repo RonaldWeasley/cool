@@ -6,8 +6,8 @@
 <meta charset="ISO-8859-1">
 <title>Hausarbeit</title>
 </head>
-<body style="background-color: pink">
-
+<body style="background-color: LemonChiffon">
+<script src='https://ccmjs.github.io/akless-components/menu/versions/ccm.menu-2.11.0.js'></script><ccm-menu-2-11-0 key='{"css":["ccm.load","https://ccmjs.github.io/akless-components/menu/resources/tabs.css"],"data":{"entries":[{"title":"Dienstplan","content":"<iframe src=\"http://localhost:8080/Hausarbeit/Dienstplan.jsp\" width=\"100%\"  frameborder=\"1\" allowTransparency=\"true\"></inframe>"}]},"helper":["ccm.load","https://ccmjs.github.io/akless-components/modules/versions/helper-5.0.0.mjs"],"html":["ccm.load","https://ccmjs.github.io/akless-components/menu/resources/templates.html"],"meta":[{"name":"dms-apps","url":"https://ccm2.inf.h-brs.de"},"1584652120733X9235786672164359"],"created_at":"2020-03-19T22:08:41+01:00","updated_at":"2020-04-10T11:58:31+02:00"}'></ccm-menu-2-11-0>
 <script src='https://ccmjs.github.io/mkaul-components/parkhaus/versions/ccm.parkhaus-9.0.0.js'></script>
 <ccm-parkhaus-9-0-0 key='{"name":"Parkhaus-Club","Max":10,"delay":100,"open_from":6,"open_to":24,"simulation_speed":60,
 "server_url":"http://localhost:8080/Hausarbeit/Parkhaus",

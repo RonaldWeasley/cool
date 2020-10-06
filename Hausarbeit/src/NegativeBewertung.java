@@ -1,10 +1,10 @@
 
-public class NegativeBewertung {
+public class NegativeBewertung implements BewertungsInterface {
 
 	private int negcounter;
 
 	public NegativeBewertung(int negcounter) {
-		this.negcounter=negcounter;
+		this.negcounter = negcounter;
 
 	}
 	

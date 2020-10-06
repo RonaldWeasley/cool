@@ -1,5 +1,5 @@
 
-public class PositiveBewertung {
+public class PositiveBewertung implements BewertungsInterface {
 
 	private int poscounter;
 

@@ -8,17 +8,11 @@ public class Nutzererfahrung {
 	}
 	
 	public String build() {
-		/*return "{\n" + " \"data\": "
-				+ "[\n" + " {\n" + 
-		" \"values\": [\n" + String.format("%d",pos)+",\n" + String.format("%d", neg)+"\n" + " ],\n" + ""
-						+ "\"labels\":[\"Gefaellt mir\",\"Gefaellt mir nicht\"],"+
+		
+		return "{\n" + " \"data\": [\n" + " {\n" + 
+				" \"x\": [\n" + " \"Likes\",\n" + " \"Dislikes\"\n" +  " ],\n" + 
+				" \"y\": [\n" + String.format(" %d,\n",pos) + String.format(" %d\n",neg) + " ],\n" + 
 				" \"type\": \"bar\"\n" + " }\n" + " ]\n" + "}";
-	}*/
-	
-	return "{\n" + " \"data\": [\n" + " {\n" + 
-	" \"x\": [\n" + " \"Likes\",\n" + " \"Dislikes\"\n" +  " ],\n" + 
-	" \"y\": [\n" + String.format(" %d,\n",pos) + String.format(" %d\n",neg) + " ],\n" + 
-	" \"type\": \"bar\"\n" + " }\n" + " ]\n" + "}";
 }
 
 }	

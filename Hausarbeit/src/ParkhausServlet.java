@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/Parkhaus")
 public class ParkhausServlet extends HttpServlet {
-
+	static ParkhausInterface parkhaus=new Parkhaus();
 	
 	
 	private ServletContext getApplication() {
@@ -50,11 +50,11 @@ public class ParkhausServlet extends HttpServlet {
 			switch(param) {
 			case "Summe":
 				//Float Summe = getPersistentSum();
-				out.println(String.format("%.2f",Parkhaus.getSum()));
-				System.out.println("Summe: " + Parkhaus.getSum());
+				out.println(String.format("%.2f",parkhaus.getSum()));
+				System.out.println("Summe: " + parkhaus.getSum());
 				break;
 			case "avg":
-				out.println(String.format("%.2f",Parkhaus.getAvg()));
+				out.println(String.format("%.2f",parkhaus.getAvg()));
 				break;
 
 			case "Fahrerstatistik":
@@ -72,21 +72,21 @@ public class ParkhausServlet extends HttpServlet {
 								+ "\"labels\":[\"gebehindert\",\"gesund\"],"+
 						" \"type\": \"pie\"\n" + " }\n" + " ]\n" + "}";*/
 				//Fahrerstatistik fs=new Fahrerstatistik(gehbehindertcounter,(int)counter-gehbehindertcounter);
-					out.println(Parkhaus.getFahrstatistik().build());
-					System.out.println(Parkhaus.getFahrstatistik().build());
+					out.println(parkhaus.getFahrstatistik().build());
+					System.out.println(parkhaus.getFahrstatistik().build());
 				break;
 			case "Gefaelltmir":
-				int gm= Parkhaus.getPosWert().build();
+				int gm= parkhaus.getPosWert().build();
 				out.println(gm);
 				System.out.println(gm);
 			break;
 			case "Gefaelltmirnicht":
-				int gmn= Parkhaus.getNegWert().build();
+				int gmn= parkhaus.getNegWert().build();
 				out.println(gmn);
 				System.out.println(gmn);
 			break;
 			case "Nutzererfahrung":
-				Nutzererfahrung ne=Parkhaus.getNuErf();
+				Nutzererfahrung ne=parkhaus.getNuErf();
 					out.println(ne.build());
 					System.out.println(ne.build());
 			}
@@ -98,24 +98,28 @@ public class ParkhausServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String body = getBody(request);
 		System.out.println(body);
-		String[] params = body.split(",");
+		String[] params = body.split("(,|=|&)");
 		String event = params[0];
+		System.out.println(event);
+		if("fname".equals(event)) {
+			
+		}
 		if("leave".equals(event)) {
 			//Float Summe = getPersistentSum();
 			String priceString = params[4];
-			Parkhaus.leave();
+			parkhaus.leave();
 			if("gehbehindert".equals(params[8])) {
-				Parkhaus.gb();
+				parkhaus.gb();
 				}
 			
 			if(!"_".equals(priceString)) {
 				float price = Float.parseFloat(priceString);
-				Parkhaus.zahlung(price);
+				parkhaus.zahlung(price);
 				
 			}
 			response.setContentType("text/html");
 			PrintWriter out = response.getWriter();
-			out.println(Parkhaus.getSum() + "€");
+			out.println(parkhaus.getSum() + "€");
 			if("Behinderbutton".equals(event)) {
 				float price = Float.parseFloat(priceString);
 				price = price * 0.5f;
@@ -150,4 +154,3 @@ public class ParkhausServlet extends HttpServlet {
 		return stringBuilder.toString();
 	}
 }
-

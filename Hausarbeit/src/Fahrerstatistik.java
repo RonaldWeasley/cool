@@ -1,5 +1,5 @@
 
-public class Fahrerstatistik {
+public class Fahrerstatistik implements FahrerstatistikInterface {
 
 	private int behindert;
 	private int gesund;
@@ -8,6 +8,7 @@ public class Fahrerstatistik {
 		this.gesund=gesund;
 	}
 	
+	@Override
 	public String build() {
 		return "{\n" + " \"data\": "
 				+ "[\n" + " {\n" + 
@@ -15,5 +16,14 @@ public class Fahrerstatistik {
 						+ "\"labels\":[\"gebehindert\",\"gesund\"],"+
 				" \"type\": \"pie\"\n" + " }\n" + " ]\n" + "}";
 	}
-}
 
+	@Override
+	public void addFahrer() {
+		gesund++;
+	}
+
+	@Override
+	public void addGehbehindert() {
+		behindert++;
+	}
+}

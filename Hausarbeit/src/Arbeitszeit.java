@@ -1,3 +1,7 @@
+/**
+ * @Author test
+ */
+
 
 public class Arbeitszeit {
 	private String tag;

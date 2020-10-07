@@ -1,3 +1,6 @@
+/**
+ * @Author 
+ */
 
 public class Parkhaus implements ParkhausInterface {
 
@@ -44,6 +47,7 @@ public class Parkhaus implements ParkhausInterface {
     }
     @Override
     public void leave(){
+    	counter++;
         fs.addFahrer();
     }
     @Override

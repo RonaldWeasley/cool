@@ -1,3 +1,7 @@
+/**
+ * @Author 
+ */
+
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -18,68 +22,58 @@ class ParkhausTest {
     	System.out.println("Start!");
         for (int i =0;i<10;i++)
         Parkhaus.leave();
-        Parkhaus.zahlung(10.7f);
-        Parkhaus.zahlung(2.7f);
-        Parkhaus.zahlung(1.3f);
     }*/
+    
+    Parkhaus p;
 
     @Test
     @DisplayName("Testet ob Summenfunktion funktioniert")
     void getSum() {
-    	Parkhaus.zahlung(10.7f);
-        Parkhaus.zahlung(2.7f);
-        Parkhaus.zahlung(1.3f);
-        assertEquals(Parkhaus.getSum(),(10.7f+2.7f+1.3f));
+    	p = new Parkhaus();
+    	p.zahlung(10.7f*100);
+        p.zahlung(2.7f*100);
+        p.zahlung(1.3f*100);
+        assertEquals((10.7f+2.7f+1.3f),(p.getSum()));
     }
     
     @Test
     @DisplayName("Keine negativen Zahlen bei getSum")
-    public String negativeZahlenSum() throws Exception{
-        if(Parkhaus.getSum() >= 0 ) {
-            return "positive";
-        } else {
-            return "negative";
-        }
+    void negativeZahlenSum(){
+    	p = new Parkhaus();
+       	assertTrue(p.getSum() >= 0);
     }
     
     @Test
     @DisplayName("Testet ob Summenfunktion bei 0 Einkommen auch 0 zurück gibt")
     void getSumGleichNull() {
-        assertEquals(Parkhaus.getSum(),(0f));
+    	p = new Parkhaus();
+        assertEquals(p.getSum(),(0f));
     }
 
     @Test
     @DisplayName("Testet ob Avg funktioniert")
-   /* @Before
-    static void setupTest(){
-        for (int i =0;i<10;i++)
-        Parkhaus.leave();
-        Parkhaus.zahlung(10.7f);
-        Parkhaus.zahlung(2.7f);
-        Parkhaus.zahlung(1.3f);
-    }*/
-    void getAvg() {
-    	Parkhaus.zahlung(10.7f);
-        Parkhaus.zahlung(2.7f);
-        Parkhaus.zahlung(1.3f);
-        assertEquals(Parkhaus.getAvg(),(10.7f+2.7f+1.3f)/10);
+    void getAvg() {	
+    	p = new Parkhaus();
+    	for (int i =0;i<10;i++) {
+            p.leave();
+        }
+    	p.zahlung(10.7f);
+        p.zahlung(2.7f);
+        p.zahlung(1.3f);
+        assertEquals((10.7f+2.7f+1.3f)/10,p.getAvg());
     }
     
     @Test
     @DisplayName("Keine negativen Zahlen bei getAvg")
-    public String negativeZahlenAvg() throws Exception{
-        if(Parkhaus.getAvg() >= 0 ) {
-            return "positive";
-        } else {
-            return "negative";
-        }
+    void negativeZahlenAvg() {
+    	p = new Parkhaus();
+    	assertTrue(p.getAvg() >= 0);
     }
 
     @Test
-    @Before
-    
     @DisplayName("Test bei leerer Fahrerstatistik")
     void getFahrstatistik() {
+    	p = new Parkhaus();
     	assertEquals("{\n" +
     		" \"data\": [\n" +
     		" {\n" +
@@ -90,27 +84,33 @@ class ParkhausTest {
     		"\"labels\":[\"gebehindert\",\"gesund\"], \"type\": \"pie\"\n" +
     		" }\n" +
     		" ]\n" +
-    		"}", Parkhaus.getFahrstatistik().build());
+    		"}", p.getFahrstatistik().build());
     }
     
     @Test
     @DisplayName("Testet 0 gesunde Kunden und 2 gehbehinderte Kunden")
     void getFahrstatistikNurGB() {
+    	p = new Parkhaus();
+    	p.getFahrstatistik().addGehbehindert();
+    	p.getFahrstatistik().addGehbehindert();
     	assertEquals("{\n" +
     		" \"data\": [\n" +
     		" {\n" +
     		" \"values\": [\n" +
-    		"0,\n" +
-    		"10\n" +
+    		"2,\n" +
+    		"0\n" +
     		" ],\n" +
     		"\"labels\":[\"gebehindert\",\"gesund\"], \"type\": \"pie\"\n" +
     		" }\n" +
     		" ]\n" +
-    		"}", Parkhaus.getFahrstatistik().build());
+    		"}", p.getFahrstatistik().build());
     }
     @Test
     @DisplayName("Testet 0 gehbehinderte Kunden und 2 gesunde Kunden")
     void getFahrstatistikNurGesunde() {
+    	p = new Parkhaus();
+    	p.getFahrstatistik().addFahrer();
+    	p.getFahrstatistik().addFahrer();
     	assertEquals("{\n" +
     		" \"data\": [\n" +
     		" {\n" +
@@ -121,19 +121,22 @@ class ParkhausTest {
     		"\"labels\":[\"gebehindert\",\"gesund\"], \"type\": \"pie\"\n" +
     		" }\n" +
     		" ]\n" +
-    		"}", Parkhaus.getFahrstatistik().build());
+    		"}", p.getFahrstatistik().build());
     }
     @Test
     void getPosWert() {
+    	p = new Parkhaus();
     }
 
     @Test
     void getNegWert() {
+    	p = new Parkhaus();
     }
 
     @Test
     @DisplayName("Test bei leeren Bewertung")
     void getNuErf() {
+    	p = new Parkhaus();
         assertEquals("{\n" +
                 " \"data\": [\n" +
                 " {\n" +
@@ -148,12 +151,13 @@ class ParkhausTest {
                 " \"type\": \"bar\"\n" +
                 " }\n" +
                 " ]\n" +
-                "}",Parkhaus.getNuErf().build());
+                "}",p.getNuErf().build());
     }
     
     @Test
     @DisplayName("Testet 0 positive Bewertungen und 2 negative Bewertungen")
     void getNuErfNurNeg() {
+    	p = new Parkhaus();
         assertEquals("{\n" +
                 " \"data\": [\n" +
                 " {\n" +
@@ -168,12 +172,13 @@ class ParkhausTest {
                 " \"type\": \"bar\"\n" +
                 " }\n" +
                 " ]\n" +
-                "}",Parkhaus.getNuErf().build());
+                "}",p.getNuErf().build());
     }
 
     @Test
     @DisplayName("Testet 0 negative Bewertungen und 2 positive Bewertungen")
     void getNuErfNurPos() {
+    	p = new Parkhaus();
         assertEquals("{\n" +
                 " \"data\": [\n" +
                 " {\n" +
@@ -188,19 +193,22 @@ class ParkhausTest {
                 " \"type\": \"bar\"\n" +
                 " }\n" +
                 " ]\n" +
-                "}",Parkhaus.getNuErf().build());
+                "}",p.getNuErf().build());
     }
     
     @Test
     void leave() {
+    	p = new Parkhaus();
     }
 
     @Test
     void gb() {
+    	p = new Parkhaus();
     }
 
     @Test
     void zahlung() {
+    	p = new Parkhaus();
     }
     
 	/**

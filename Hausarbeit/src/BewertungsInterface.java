@@ -1,3 +1,7 @@
+/**
+ * @Author 
+ */
+
 
 public interface BewertungsInterface {
     int getCounter();

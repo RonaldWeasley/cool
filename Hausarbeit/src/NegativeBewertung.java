@@ -1,3 +1,7 @@
+/**
+ * @Author 
+ */
+
 
 public class NegativeBewertung implements BewertungsInterface {
 

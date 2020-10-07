@@ -1,6 +1,5 @@
 /**
- * @author 
- *
+ * @Author 
  */
 
 
@@ -37,7 +36,9 @@ public class ParkhausServlet extends HttpServlet {
 		return Summe;
 	}
 	
-	
+/**
+ * @Author 
+ */	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String[] requestParamString = request .getQueryString().split("=");
@@ -94,7 +95,11 @@ public class ParkhausServlet extends HttpServlet {
 			System.out.println("Invalid Command: " + request.getQueryString());
 		}
 	}
-
+	
+/**
+ * @Author 
+ */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String body = getBody(request);
 		System.out.println(body);
@@ -130,6 +135,11 @@ public class ParkhausServlet extends HttpServlet {
 		
 		
 	}
+
+/**
+ * @Author 
+ */
+
 	private static String getBody(HttpServletRequest request) throws IOException {
 		StringBuilder stringBuilder = new StringBuilder();
 		BufferedReader bufferedReader = null;

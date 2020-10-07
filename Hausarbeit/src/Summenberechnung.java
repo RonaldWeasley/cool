@@ -1,3 +1,7 @@
+/**
+ * @Author 
+ */
+
 import javax.servlet.ServletContext;
 
 public class Summenberechnung {

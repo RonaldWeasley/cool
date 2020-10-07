@@ -1,3 +1,7 @@
+/**
+ * @Author 
+ */
+
 
 public class Durchschnittsberechnung {
 	private float avg;
